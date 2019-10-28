@@ -1,0 +1,15 @@
+C:\Users\zenya\source\repos\Lab_1_ISIS\Lab_1_ISIS\obj\Debug\Lab_1_ISIS.csprojAssemblyReference.cache
+C:\Users\zenya\source\repos\Lab_1_ISIS\Lab_1_ISIS\obj\Debug\Lab_1_ISIS.Properties.Resources.resources
+C:\Users\zenya\source\repos\Lab_1_ISIS\Lab_1_ISIS\obj\Debug\Lab_1_ISIS.csproj.GenerateResource.cache
+C:\Users\zenya\source\repos\Lab_1_ISIS\Lab_1_ISIS\bin\Debug\Lab_1_ISIS.exe.config
+C:\Users\zenya\source\repos\Lab_1_ISIS\Lab_1_ISIS\bin\Debug\Lab_1_ISIS.exe
+C:\Users\zenya\source\repos\Lab_1_ISIS\Lab_1_ISIS\bin\Debug\Lab_1_ISIS.pdb
+C:\Users\zenya\source\repos\Lab_1_ISIS\Lab_1_ISIS\obj\Debug\Lab_1_ISIS.MDI.resources
+C:\Users\zenya\source\repos\Lab_1_ISIS\Lab_1_ISIS\obj\Debug\Lab_1_ISIS.Child.resources
+C:\Users\zenya\source\repos\Lab_1_ISIS\Lab_1_ISIS\obj\Debug\Lab_1_ISIS.exe
+C:\Users\zenya\source\repos\Lab_1_ISIS\Lab_1_ISIS\obj\Debug\Lab_1_ISIS.pdb
+C:\Users\zenya\source\repos\Lab_1_ISIS\Lab_1_ISIS\bin\Debug\EntityFramework.dll
+C:\Users\zenya\source\repos\Lab_1_ISIS\Lab_1_ISIS\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\zenya\source\repos\Lab_1_ISIS\Lab_1_ISIS\bin\Debug\EntityFramework.xml
+C:\Users\zenya\source\repos\Lab_1_ISIS\Lab_1_ISIS\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\zenya\source\repos\Lab_1_ISIS\Lab_1_ISIS\obj\Debug\Lab_1_ISIS.csproj.CopyComplete
