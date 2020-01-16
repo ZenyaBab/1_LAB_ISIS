@@ -11,12 +11,14 @@ using System.IO;
 using System.Windows;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using System.Data.SqlClient;
 
 
 namespace Lab_1_ISIS
 {
     public partial class Child : Form
     {
+        SqlConnection sqlConnection;
         public Child()
         {
             InitializeComponent();
@@ -32,36 +34,29 @@ namespace Lab_1_ISIS
             }
             else
             {
-                SaveFileDialog save = new SaveFileDialog();
-                save.Filter = "Текстовый файл (*.txt) | *.txt";
-                if (save.ShowDialog() == DialogResult.OK)
-                {
-                    File.WriteAllText(save.FileName,richTextBox1.Text);
-                }
-                XDocument doc = new XDocument();
-                XElement text = new XElement("Result", richTextBox1.Text);
-                doc.Add(text);
-                doc.Save("result.xml");
-                MessageBox.Show("XML файл сохранен");
+                SqlCommand close = new SqlCommand("INSERT INTO dbo.Book VALUES(@Name, @Text)", sqlConnection);
+                close.Parameters.AddWithValue("Text", richTextBox1.Text);
+                close.Parameters.AddWithValue("Name", text);
+                close.ExecuteScalar();
+                MessageBox.Show("Файл сохранен");
             }
         }
 
         public string text = "";
         private void button1_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "Текстовые файлы (*.rtf; *.txt; *.dat) | *.rtf; *.txt; *.dat";
-            openFileDialog1.Title = "Загрузить из...";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                this.Text = openFileDialog1.FileName;
-                text = openFileDialog1.FileName;
-                try
-                {
-                    richTextBox1.LoadFile(text);
-                }
-                catch { richTextBox1.Text = File.ReadAllText(text); }
-            }
+         
+            string textt = "";
+            SqlCommand loadtxt = new SqlCommand("select Text from dbo.Book where Name = @Name", sqlConnection);
+            loadtxt.Parameters.AddWithValue("Name", domainUpDown1.SelectedItem);
+            textt = (string)loadtxt.ExecuteScalar();
+            richTextBox1.Text = textt;
+
+            SqlCommand load = new SqlCommand("select Name from dbo.Book where Name = @Name", sqlConnection);
+            load.Parameters.AddWithValue("Name", domainUpDown1.SelectedItem);
+            text = (string)load.ExecuteScalar();
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -116,35 +111,129 @@ namespace Lab_1_ISIS
                 {
                     richTextBox1.Text = Regex.Replace(richTextBox1.Text, textBox1.Text, textBox2.Text);
                 }
+                else
+                {
+                    MessageBox.Show("Нет текста для замены");
+                }
             }
+            else
+            {
+                MessageBox.Show("Нет текста для замены");
+            }
+
+
         }
 
         private void Child_FormClosing_1(object sender, FormClosingEventArgs e)
         {
-            ini inif = new ini("settings.ini");
-            inif.Write("FormWidth", Convert.ToString(this.Size.Width));
-            inif.Write("FormHeight", Convert.ToString(this.Size.Height));
-            inif.Write("Label3Width", Convert.ToString(label3.Size.Width));
-            inif.Write("Label3Height", Convert.ToString(label3.Size.Height));
-            inif.Write("Label3MaximumWeidht", Convert.ToString(label3.MaximumSize.Width));
-            inif.Write("Label3MaximumHeight", Convert.ToString(label3.MaximumSize.Height));
-            inif.Write("AutoSize", Convert.ToString(label3.AutoSize));
-            inif.Write("PoiskText", textBox1.Text);
-            inif.Write("ZamenaText", textBox2.Text);
-            if (text != "")
-                inif.Write("Pathtext", text);
+            try
+            {
+                SqlCommand Widthcom = new SqlCommand("update dbo.Setting set FormWidth = @FormWidth where ID_Setting = 1", sqlConnection);
+                Widthcom.Parameters.AddWithValue("FormWidth", this.Size.Width);
+                Widthcom.ExecuteScalar();
+
+                SqlCommand Heightcom = new SqlCommand("update dbo.Setting set FormHeight = @FormHeight where ID_Setting = 1", sqlConnection);
+                Heightcom.Parameters.AddWithValue("FormHeight", this.Size.Height);
+                Heightcom.ExecuteScalar();
+
+                SqlCommand Label3Width = new SqlCommand("update dbo.Setting set Label3Width = @Label3Width where ID_Setting = 1", sqlConnection);
+                Label3Width.Parameters.AddWithValue("Label3Width", label3.Size.Width);
+                Label3Width.ExecuteScalar();
+
+                SqlCommand Label3Height = new SqlCommand("update dbo.Setting set Label3Height = @Label3Height where ID_Setting = 1", sqlConnection);;
+                Label3Height.Parameters.AddWithValue("Label3Height", label3.Size.Height);
+                Label3Height.ExecuteScalar();
+
+                SqlCommand Label3MaximumWeidht = new SqlCommand("update dbo.Setting set Label3MaximumWeidht = @Label3MaximumWeidht where ID_Setting = 1", sqlConnection);
+                Label3MaximumWeidht.Parameters.AddWithValue("Label3MaximumWeidht", label3.MaximumSize.Width);
+                Label3MaximumWeidht.ExecuteScalar();
+
+                SqlCommand Label3MaximumHeight = new SqlCommand("update dbo.Setting set Label3MaximumHeight = @Label3MaximumHeight where ID_Setting = 1", sqlConnection);
+                Label3MaximumHeight.Parameters.AddWithValue("Label3MaximumHeight", label3.MaximumSize.Height);
+                Label3MaximumHeight.ExecuteScalar();
+
+                SqlCommand AutoSize = new SqlCommand("update dbo.Setting set AutoSize = @AutoSize where ID_Setting = 1", sqlConnection);
+                AutoSize.Parameters.AddWithValue("AutoSize", label3.AutoSize);
+                AutoSize.ExecuteScalar();
+
+                SqlCommand PoiskText = new SqlCommand("update dbo.Setting set PoiskText = @PoiskText where ID_Setting = 1", sqlConnection);
+                PoiskText.Parameters.AddWithValue("PoiskText", textBox1.Text);
+                PoiskText.ExecuteScalar();
+
+                SqlCommand ZamenaText = new SqlCommand("update dbo.Setting set ZamenaText = @ZamenaText where ID_Setting = 1", sqlConnection);
+                ZamenaText.Parameters.AddWithValue("ZamenaText", textBox2.Text);
+                ZamenaText.ExecuteScalar();
+
+                if (text != "")
+                {
+                    SqlCommand Pathtext = new SqlCommand("update dbo.Setting set Pathtext = @Pathtext where ID_Setting = 1", sqlConnection);
+                    Pathtext.Parameters.AddWithValue("Pathtext", text);
+                    Pathtext.ExecuteScalar();
+                }
+                
+            }
+            catch { }
+
+            if (sqlConnection != null && sqlConnection.State != ConnectionState.Closed)
+                sqlConnection.Close();
+
+            //ini inif = new ini("settings.ini");
+            //inif.Write("FormWidth", Convert.ToString(this.Size.Width));
+            //inif.Write("FormHeight", Convert.ToString(this.Size.Height));
+            //inif.Write("Label3Width", Convert.ToString(label3.Size.Width));
+            //inif.Write("Label3Height", Convert.ToString(label3.Size.Height));
+            //inif.Write("Label3MaximumWeidht", Convert.ToString(label3.MaximumSize.Width));
+            //inif.Write("Label3MaximumHeight", Convert.ToString(label3.MaximumSize.Height));
+            //inif.Write("AutoSize", Convert.ToString(label3.AutoSize));
+            //inif.Write("PoiskText", textBox1.Text);
+            //inif.Write("ZamenaText", textBox2.Text);
+            //if (text != "")
+            //    inif.Write("Pathtext", text);
         }
 
         private void Child_Load(object sender, EventArgs e)
         {
-            ini inif = new ini("settings.ini");
+            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=Laba3_ISIS;Integrated Security=True";
+            sqlConnection = new SqlConnection(connectionString);
+            sqlConnection.Open();
+
+            SqlDataReader sqlReader = null;
+            SqlCommand name = new SqlCommand("select Name from dbo.Book", sqlConnection);
             try
             {
-                Width = Convert.ToInt32(inif.Read("FormWidth"));
-                Height = Convert.ToInt32(inif.Read("FormHeight"));
-                label3.Text = "Путь к последнему открытому тексту:     " + inif.Read("Pathtext");
+                sqlReader = name.ExecuteReader();
+                while (sqlReader.Read())
+                {
+                    domainUpDown1.Items.Add(Convert.ToString(sqlReader["Name"]));
+                }
             }
-            catch { }
+            finally
+            {
+                if (sqlReader != null)
+                    sqlReader.Close();
+            }
+            domainUpDown1.SelectedIndex = 0;
+           
+            try
+            {
+                SqlCommand Widthcom = new SqlCommand("select FormWidth from dbo.Setting where ID_Setting = 1", sqlConnection);
+                Widthcom.Parameters.AddWithValue("FormWidth", "FormWidth");
+                Width = Convert.ToInt32(Widthcom.ExecuteScalar());
+
+                SqlCommand Heightcom = new SqlCommand("select FormHeight from dbo.Setting where ID_Setting = 1", sqlConnection);
+                Heightcom.Parameters.AddWithValue("FormHeight", "FormHeight");
+                Height = Convert.ToInt32(Heightcom.ExecuteScalar());
+            }
+            catch
+            { }
+            //ini inif = new ini("settings.ini");
+            //try
+            //{
+            //    Width = Convert.ToInt32(inif.Read("FormWidth"));
+            //    Height = Convert.ToInt32(inif.Read("FormHeight"));
+            //    label3.Text = "Путь к последнему открытому тексту:     " + inif.Read("Pathtext");
+            //}
+            //catch { }
         }
 
 

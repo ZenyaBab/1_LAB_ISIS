@@ -17,13 +17,15 @@ namespace Lab_1_ISIS
             InitializeComponent();
         }
 
+        int i = 1;
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             IsMdiContainer = true;
             Child newForm = new Child();
             newForm.MdiParent = this;
+            newForm.Text = "Child " + i;
+            i++;
             newForm.Show();
-
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -76,6 +78,11 @@ namespace Lab_1_ISIS
                 f.Location = new Point(i);
                 i += 100;
             }
+        }
+
+        private void MDI_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

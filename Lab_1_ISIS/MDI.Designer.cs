@@ -68,21 +68,21 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(214, 34);
             this.newToolStripMenuItem.Text = "Создать";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(214, 34);
             this.closeToolStripMenuItem.Text = "Закрыть";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // closeAllToolStripMenuItem
             // 
             this.closeAllToolStripMenuItem.Name = "closeAllToolStripMenuItem";
-            this.closeAllToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.closeAllToolStripMenuItem.Size = new System.Drawing.Size(214, 34);
             this.closeAllToolStripMenuItem.Text = "Закрыть все";
             this.closeAllToolStripMenuItem.Click += new System.EventHandler(this.closeAllToolStripMenuItem_Click);
             // 
@@ -101,35 +101,35 @@
             // cascadeToolStripMenuItem
             // 
             this.cascadeToolStripMenuItem.Name = "cascadeToolStripMenuItem";
-            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(238, 34);
             this.cascadeToolStripMenuItem.Text = "Каскад";
             this.cascadeToolStripMenuItem.Click += new System.EventHandler(this.cascadeToolStripMenuItem_Click);
             // 
             // verticalTileToolStripMenuItem
             // 
             this.verticalTileToolStripMenuItem.Name = "verticalTileToolStripMenuItem";
-            this.verticalTileToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.verticalTileToolStripMenuItem.Size = new System.Drawing.Size(238, 34);
             this.verticalTileToolStripMenuItem.Text = "Вертикально";
             this.verticalTileToolStripMenuItem.Click += new System.EventHandler(this.verticalTileToolStripMenuItem_Click);
             // 
             // horizontalTileToolStripMenuItem
             // 
             this.horizontalTileToolStripMenuItem.Name = "horizontalTileToolStripMenuItem";
-            this.horizontalTileToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.horizontalTileToolStripMenuItem.Size = new System.Drawing.Size(238, 34);
             this.horizontalTileToolStripMenuItem.Text = "Горизонтально";
             this.horizontalTileToolStripMenuItem.Click += new System.EventHandler(this.horizontalTileToolStripMenuItem_Click);
             // 
             // mozaikaToolStripMenuItem
             // 
             this.mozaikaToolStripMenuItem.Name = "mozaikaToolStripMenuItem";
-            this.mozaikaToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.mozaikaToolStripMenuItem.Size = new System.Drawing.Size(238, 34);
             this.mozaikaToolStripMenuItem.Text = "Мозайка";
             this.mozaikaToolStripMenuItem.Click += new System.EventHandler(this.mozaikaToolStripMenuItem_Click);
             // 
             // минимизацияToolStripMenuItem
             // 
             this.минимизацияToolStripMenuItem.Name = "минимизацияToolStripMenuItem";
-            this.минимизацияToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.минимизацияToolStripMenuItem.Size = new System.Drawing.Size(238, 34);
             this.минимизацияToolStripMenuItem.Text = "Минимизация";
             this.минимизацияToolStripMenuItem.Click += new System.EventHandler(this.минимизацияToolStripMenuItem_Click);
             // 
@@ -142,6 +142,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MDI";
             this.Text = "MDI";
+            this.Load += new System.EventHandler(this.MDI_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

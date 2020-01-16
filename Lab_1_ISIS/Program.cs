@@ -16,7 +16,7 @@ namespace Lab_1_ISIS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MDI());
+            Application.Run(new Autorization());
         }
     }
 }
